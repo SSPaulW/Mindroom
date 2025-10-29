@@ -1,19 +1,15 @@
 // src/api.js
-import axios from "axios";
-
-const API_BASE = process.env.REACT_APP_API || "";
-
 export async function analyzeText(text) {
-  // If API_BASE configured, call /analyze
-  if (API_BASE) {
-    try {
-      const res = await axios.post(`${API_BASE}/analyze`, { text });
-      return res.data;
-    } catch (err) {
-      console.warn("Analyze API failed, fallback will be used.", err?.message);
-      return fallbackPredict(text);
-    }
-  } else {
+  const API_BASE = process.env.REACT_APP_API || "";
+  if (!API_BASE) {
+    // fallback ngay
+    return fallbackPredict(text);
+  }
+  try {
+    const res = await axios.post(`${API_BASE}/analyze`, { text });
+    return res.data;
+  } catch (err) {
+    console.warn("API lỗi, dùng fallback:", err.message);
     return fallbackPredict(text);
   }
 }
