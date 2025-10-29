@@ -13,7 +13,13 @@ import { onAuthStateChanged } from "firebase/auth";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  useEffect(() => onAuthStateChanged(auth, u => setUser(u)), []);
+  useEffect(() => {
+  try {
+    onAuthStateChanged(auth, u => setUser(u));
+  } catch (err) {
+    console.error("Auth error:", err);
+  }
+}, []);
   return (
     <BrowserRouter>
       <NavBar user={user} />
