@@ -11,19 +11,19 @@ import Video from "./pages/Video";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-export default function App(){
+export default function App() {
   const [user, setUser] = useState(null);
-  useEffect(()=> onAuthStateChanged(auth, u => setUser(u)), []);
+  useEffect(() => onAuthStateChanged(auth, u => setUser(u)), []);
   return (
     <BrowserRouter>
       <NavBar user={user} />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/questionnaire" element={<Questionnaire/>} />
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/video" element={<Video/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/questionnaire" element={<Questionnaire />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/video" element={<Video />} />
       </Routes>
     </BrowserRouter>
   );
